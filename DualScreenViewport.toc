@@ -1,0 +1,6 @@
+## Interface: 50400
+## Title: Dual Screen Viewport
+## Notes: Arranges viewport and world frame
+
+DualScreenViewport.lua
+DualScreenViewport.xml

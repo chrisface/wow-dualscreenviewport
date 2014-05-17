@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
+	..\..\FrameXML\UI.xsd">
+
+	<Script File="DualScreenViewport.lua"/>
+
+	<Frame name="DualScreenViewport" parent="UIParent" frameStrata="BACKGROUND" frameLevel="0">
+		<Scripts>
+			<OnLoad>
+				self:RegisterEvent("PLAYER_LOGIN")
+			</OnLoad>
+			<OnEvent>
+				if event == "PLAYER_LOGIN" then
+					Initialize();	
+				end
+			</OnEvent>
+		</Scripts>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture setAllPoints="true">
+					<Color r="0.5" g="0.5" b="0.5"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>
+
