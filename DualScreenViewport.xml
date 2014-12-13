@@ -19,9 +19,9 @@
 
 		<Layers>
 			<Layer level="ARTWORK">
-				<Texture setAllPoints="true">
-					<Color r="0.5" g="0.5" b="0.5"/>
-				</Texture>
+				<!-- <Texture setAllPoints="true" file="Interface/WorldMap/StormwindCity/StormwindCity11"> -->
+					<!-- <Color r="0.5" g="0.5" b="0.5"/> -->
+				<!-- </Texture> -->
 			</Layer>
 		</Layers>
 	</Frame>

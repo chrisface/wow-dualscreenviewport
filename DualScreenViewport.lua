@@ -2,6 +2,8 @@ function Initialize()
 	SetupControlFrame();
 	SetupWorldFrame();
 	SetMap();
+	-- SetMapBackground();
+	PositionChatFrames();
 
 	CreateOverrides();
 end
@@ -37,11 +39,16 @@ function CreateOverrides()
 	end
 
 
+	-- DBM
 	-- DBM-Core.lua needs to be overriden to this
 	-- setRaidWarningPositon = function()
-
 	-- end
 
+	-- ShadowedUnitFrames
+	-- In ShadowedUF_Options/config.lua change references of UIParent to WorldFrame
+
+	-- Parrot
+	-- Rename ALL refrences of UIParent to WorldFrame (there are a lot)
 end
 
 function SetupWorldFrame()
@@ -97,6 +104,44 @@ function MapIcons()
 	GuildInstanceDifficulty:SetPoint("TopRight", 30,-100)
 end
 
+function PositionChatFrames()
+	width = 500
+
+	ChatFrame1:ClearAllPoints();
+	ChatFrame1:SetWidth(width);
+	ChatFrame1:SetPoint("BottomLeft", DualScreenViewport,"BottomLeft", 0, 35); 
+
+	ChatFrame3:ClearAllPoints();
+	ChatFrame3:SetWidth(width);
+	ChatFrame3:SetPoint("TopLeft", ChatFrame1,"TopRight",6,0); 
+
+	ChatFrame4:ClearAllPoints();
+	ChatFrame4:SetWidth(width);
+	ChatFrame4:SetPoint("TopLeft", ChatFrame3,"TopRight",6,0); 
+
+	
+-- ChatFrame2:ClearAllPoints();
+-- ChatFrame2:SetPoint("BottomLeft")
+
+-- local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(2);
+-- print(locked)
+end
+
+function SetMapBackground()
+	WorldMapDetailFrame:ClearAllPoints();
+	WorldMapDetailFrame:SetScale(1);
+	WorldMapDetailFrame:SetPoint("TopLeft", DualScreenViewport);
+	WorldMapDetailFrame:SetPoint("BottomRight", DualScreenViewport);
+
+	for i=1, 12 do
+	   _G["WorldMapDetailTile"..i]:SetWidth(DualScreenViewport:GetWidth()/4);
+	   _G["WorldMapDetailTile"..i]:SetHeight(DualScreenViewport:GetWidth()/3);
+	end
+
+--WorldMapDetailFrame:SetPoint("BottomRight", DualScreenViewPort);
+
+end
+
 function PortalWidth()
 	return (GetScreenWidth() * WorldFrame:GetEffectiveScale()) / 2;
 end
@@ -105,7 +150,9 @@ function reAlignAllFrames()
 	local kids = { UIParent:GetChildren() };
 	for _, child in ipairs(kids) do
 		if (child ~= DualScreenViewport and child ~= ChatFrame1 and child ~= ChatFrame2 and child ~= ChatFrame3) then
-			reAlignFrame(child)	
+			if (child:IsForbidden() == false) then
+				reAlignFrame(child)	
+			end
 		end
 	end
 end
@@ -131,9 +178,9 @@ function reAlignFrame(frame)
 		
 		frame:SetPoint(point, relativeTo, relativePoint, x, y);	   
 
-		if (frame == RaidWarningFrame) then
-			a,b =RaidWarningFrame:GetPoint(1)
-			print(b:GetName())
-		end
+		-- if (frame == RaidWarningFrame) then
+		-- 	a,b =RaidWarningFrame:GetPoint(1)
+		-- 	print(b:GetName())
+		-- end
 	end
 end
